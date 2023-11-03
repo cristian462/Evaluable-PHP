@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario</title>
+    <link rel="stylesheet" type="text/css" href="../style/usuario.css"></link>
 </head>
 <body>
     <?php
@@ -11,6 +12,7 @@
             echo $error."<br>";
         }
     ?>
+    <h1>Modificar Usuario</h1>
     <form action="" method="post">
         <label for="pass">Contraseña:</label>
         <input type="password" name="pass">

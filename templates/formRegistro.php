@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="stylesheet" type="text/css" href="../style/registro.css"></link>
 </head>
 <body>
     <?php
@@ -11,6 +12,7 @@
             echo $error."<br>";
         }
     ?>
+    <h1>Registro</h1>
     <form action="" method="post" enctype="multipart/form-data">
     <label for="nombre">Nombre:</label>
     <input type="text" name="nombre"><br>
