@@ -1,6 +1,6 @@
 ﻿<?php
 //Pinta la cabecera HTML
-function cabecera($titulo=NULL) // el archivo actual
+function cabecera($titulo=NULL,$css) // el archivo actual
 {
     if (is_null($titulo)) {
         $titulo = basename(__FILE__);
@@ -16,6 +16,7 @@ function cabecera($titulo=NULL) // el archivo actual
 
 			</title>
 <meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="<?=$css?>"><link>
 </head>
 <body>
 <?php
