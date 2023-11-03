@@ -126,7 +126,6 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido=FALSE
 {   $cuantificador= ($requerido)?"+":"*";
         if ((preg_match("/^[0-9]".$cuantificador."$/", $num))&&($num<=$max) ) {
 
-            
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
@@ -136,7 +135,7 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido=FALSE
 /*
  Valida la subida de un archivo a un servidor.
 */
-function cFile(string $nombre, array &$errores, array $extensiones_validas, string $directorio, int  $max_file_size): boolean|string
+function cFile(string $nombre, array &$errores, array $extensiones_validas, string $directorio, int  $max_file_size):bool|string
 {
 if ((!isset($_FILES['imagen']))||($_FILES[$nombre]['error'] != 0)) {                   // se comprueban los errores del servidor
         $errores["$nombre"] = "Error al subir el archivo " . $nombre . ". Prueba de nuevo";
