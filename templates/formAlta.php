@@ -21,12 +21,12 @@
     </select><br>
     <label for="desc">Descripcion del servicio:</label>
     <textarea name="desc"cols="30" rows="10" placeholder="Dame una breve descripcion de lo que ofreces hacer"></textarea><br>
-    <label for="tipo">Tipo de Pago</label>
+    <label for="tipo">Tipo de Pago:</label>
     <input type="radio" name="pago" id="" value="inter">Intercambio</input>
     <input type="radio" name="pago" id="" value="dinero">Dinero</input><br>
-    <label for="precio">Precio por hora</label>
+    <label for="precio">Precio por hora:</label>
     <input type="text"name="precio"><br>
-    <label for="ubi">Ubicación</label>
+    <label for="ubi">Ubicación:</label>
     <input type="text" name="ubi"><br>
     <select name="disponible">
         <option value="manana">Mañanas</option>
