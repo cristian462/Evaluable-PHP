@@ -2,7 +2,6 @@
     include ("../libs/bGeneral.php");
     cabecera("Alta","../style/alta.css");
     $errores=[];
-    $erroresfoto=[];
     $titulo="";
     $servicio="";
     $desc="";
@@ -22,7 +21,7 @@
         $precio=recoge("precio");
         $ubi=recoge("ubi");
         $disponible=recoge("disponible");
-        cFile("foto", $erroresfoto , ["jpg","jpeg","png"],"../img/",2000000);
+        cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);
 
         if(empty($titulo)){
             $errores["emptyTitulo"]="El titulo está vacío";
@@ -38,14 +37,12 @@
         if(empty($pago)){
             $errores["emptyPago"]= "El pago no está seleccionado";
         }
-        if($pago=="pago"){
-            if(empty($precio)){
-                $errores["emptyPrecio"]= "Si el tipo de pago no es en intercambio 
-                debe especificarse el importe";
+            if(empty($precio)&& $pago=="pago"){
+                $errores["emptyPrecio"]= "Si el tipo de pago no es en intercambio debe especificarse el importe";
             }else{
                 cNum($precio,"numericoPago",$errores,true,PHP_INT_MAX);
             }
-        }
+        
         if(empty($ubi)){
             $errores["emptyUbi"]="La ubicación no está establecida";
         }

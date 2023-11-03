@@ -141,6 +141,10 @@ function cFile(string $nombre, array &$errores, array $extensiones_validas, stri
 if ((!isset($_FILES['imagen']))||($_FILES[$nombre]['error'] != 0)) {                   // se comprueban los errores del servidor
         $errores["$nombre"] = "Error al subir el archivo " . $nombre . ". Prueba de nuevo";
         return false;
+        if (!$esRequerido && (!isset($_FILES[$nombre]) || $_FILES[$nombre]['error'] == UPLOAD_ERR_NO_FILE)) {
+            return true; // No se subió ningún archivo, pero no es un error si no es requerido.
+        }
+
     } else {
 
         $nombreArchivo_original = strip_tags($_FILES[$nombre]['name']);
