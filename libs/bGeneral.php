@@ -126,6 +126,7 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido=FALSE
 {   $cuantificador= ($requerido)?"+":"*";
         if ((preg_match("/^[0-9]".$cuantificador."$/", $num))&&($num<=$max) ) {
 
+            
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
