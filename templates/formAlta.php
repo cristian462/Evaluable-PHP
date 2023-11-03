@@ -24,8 +24,19 @@
     <label for="tipo">Tipo de Pago</label>
     <input type="radio" name="pago" id="" value="inter">Intercambio</input>
     <input type="radio" name="pago" id="" value="dinero">Dinero</input><br>
-    <label for="precio">Precio/h</label>
-    <input type="text"name="">
+    <label for="precio">Precio por hora</label>
+    <input type="text"name="precio"><br>
+    <label for="ubi">Ubicación</label>
+    <input type="text" name="ubi"><br>
+    <select name="disponible">
+        <option value="manana">Mañanas</option>
+        <option value="tarde">Tardes</option>
+        <option value="noche">Noches</option>
+        <option value="finde">Fines de Semana</option>
+    </select><br>
+    <label for="foto"></label>
+    <input type="file" name="foto"><br>
+    <input type="submit" name="enviar" value="enviar">
 
 </body>
 </html>

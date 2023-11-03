@@ -30,6 +30,5 @@
     <textarea name="info" cols="30" rows="10" placeholder="Indica una descripción tuya"></textarea><br>
     <input type="submit" name="bAceptar" value="Registrarse">
     </form>
-
 </body>
 </html>
