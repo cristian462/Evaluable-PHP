@@ -1,10 +1,10 @@
-   <?php
-    foreach($errores as $error){
+
+    <?php
+    foreach($errrores as $error){
         echo $error . "<br>";
     }
     ?>
     <h1>Alta de Servicio</h1>
-    <form action="" method="post" enctype="multipart/form-data">
     <label for="titulo">Titulo:</label>
     <input type="text" name="titulo"><br>
     <label for="servicio">Tipo de Servicio:</label>
@@ -31,4 +31,3 @@
     <label for="foto"></label>
     <input type="file" name="foto"><br>
     <input type="submit" name="enviar" value="enviar">
-    </form>

@@ -16,7 +16,7 @@ function cabecera($titulo=NULL,$css) // el archivo actual
 
 			</title>
 <meta charset="utf-8" />
-<link rel="stylesheet" type="text/css" href="<?=$css?>"><link>
+<link rel="stylesheet" href="<?=$css?>">
 </head>
 <body>
 <?php
@@ -100,6 +100,18 @@ function recoge($var)
 
     return $tmp;
 }
+function recogeArray(string $var):array //para checkbox multiple
+{
+    $array=[];
+    if (isset($_REQUEST[$var])&&(is_array($_REQUEST[$var]))){
+        foreach($_REQUEST[$var] as $valor)
+        $array[]=strip_tags(sinEspacios($valor));
+        
+    }
+    
+    return $array;
+}
+
 /*
 Función que permite validar cadenas de texto.
 Le pasamos cadena, nombre de campo y array de errores y
@@ -108,8 +120,12 @@ si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a 
 */
 
 function cTexto(string $text, string $campo, array &$errores, int $max = 40,
-int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
+int $min = 1, bool $espacios = TRUE, bool $case = TRUE,bool $requerido=false)
 {
+    if(empty($text)&&$requerido){
+        $errores[$campo] = "El campo $campo esta vacio";
+        return false;
+    }
 $case=($case===TRUE)?"i":"";
 $espacios=($espacios===TRUE)?" ":"";
 if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
@@ -118,33 +134,67 @@ if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTild
 $errores[$campo] = "Error en el campo $campo";
  return false;
 }
-
+function fechaValida($fechaIntroducida, $formato){
+	$fechaArray = date_parse_from_format($formato, $fechaIntroducida);
+    if(checkdate($fechaArray["month"],$fechaArray["day"],$fechaArray["year"])){
+        return true;
+    } else {
+		return false;
+	}
+}
 /*
 Función que valida una cadena que contiene sólo números.
 Además valida si el campo es o no requerido y el valor máximo
 */
 function cNum(string $num, string $campo, array &$errores, bool $requerido=FALSE, int $max=PHP_INT_MAX)
 {   $cuantificador= ($requerido)?"+":"*";
+    
         if ((preg_match("/^[0-9]".$cuantificador."$/", $num))&&($num<=$max) ) {
-
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
+function cCorreo(string $correo,string $campo,array &$errores,bool $requerido=TRUE){
+    if($requerido==true && empty ($correo)){
+        $errores[$campo] = "necesitas rellenar el campo ".$campo;
+        return false;
+    }
+    if ((preg_match("/^[a-zA-Z0-9]{1,15}[@](hotmail|gmail|outlook)[.](es|com)$/",$correo))){
+        return true;
+    }else{
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+    }
+}
+
+function cCheck (array $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE) //para validar checkboxMultiple
+{
+    if (($requerido) && (count($text)===0)){
+            $errores[$campo] = "Error en el campo $campo";
+            return false;
+    }
+    foreach ($text as $valor){
+        if (!in_array($valor, $valores)){
+            $errores[$campo] = "Error en el campo $campo";
+            return false;
+        }
+        
+    }
+    return true;
+}
 
 /*
  Valida la subida de un archivo a un servidor.
 */
-function cFile(string $nombre, array &$errores, array $extensiones_validas, string $directorio, int  $max_file_size):bool|string
+function cFile(string $nombre, array &$errores, array $extensiones_validas, string $directorio, int  $max_file_size): bool|string
 {
-if ((!isset($_FILES['imagen']))||($_FILES[$nombre]['error'] != 0)) {                   // se comprueban los errores del servidor
+    if (empty($_FILES[$nombre]["name"])) {
+        return false; // No se ha subido ningún archivo, salir del método.
+    }
+if (($_FILES[$nombre]['error'] != 0)) {// se comprueban los errores del servidor
         $errores["$nombre"] = "Error al subir el archivo " . $nombre . ". Prueba de nuevo";
         return false;
-        if (!$esRequerido && (!isset($_FILES[$nombre]) || $_FILES[$nombre]['error'] == UPLOAD_ERR_NO_FILE)) {
-            return true; // No se subió ningún archivo, pero no es un error si no es requerido.
-        }
-
     } else {
 
         $nombreArchivo_original = strip_tags($_FILES[$nombre]['name']);
@@ -169,7 +219,7 @@ if ((!isset($_FILES['imagen']))||($_FILES[$nombre]['error'] != 0)) {            
             // Movemos el fichero a la ubicación definitiva
             if (move_uploaded_file($directorioTemp, $nombreCompleto)) {
 
-                return  $nombreArchivo;
+                return  $nombreArchivo . "." . $extension;
             } else {
                 $errores["$nombre"] = "Error: No se puede mover el fichero a su destino";
                 return false;
