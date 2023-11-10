@@ -23,11 +23,8 @@
         $ubi=recoge("ubi");
         $disponible=recoge("disponible");
 
-        if(empty($titulo)){
-            $errores["emptyTitulo"]="El titulo está vacío";
-        }else{
-            cTexto($titulo,"titulo",$errores,40,3,true,true);
-        }
+        cTexto($titulo,"titulo",$errores,40,3,true,true,true);
+        
         if(empty($servicio)){
             $errores["emptyServicio"]= "El servicio no está seleccionado";
         }
@@ -38,12 +35,7 @@
             $errores["emptyPago"]= "El pago no está seleccionado";
         }
             if(empty($precio)&& $pago=="pago"){
-                $errores["emptyPrecio"]= "Si el tipo de pago no es en intercambio debe especificarse el importe";
-            }else{
-                if(cNum($precio,"numericoPago",$errores,true,PHP_INT_MAX)==true){
-                    $_SESSION["precio"]=recoge("precio");
-                    cNum($precio,"numericoPago",$errores,true,PHP_INT_MAX);
-                }
+                cNum($precio,"CantidadPago",$errores,true);
             }
 
         if(empty($ubi)){
@@ -53,21 +45,22 @@
             $errores["emptyDisponibilidad"]= "La disponibilidad no está seleccionada";
         }
         if(empty($errores)){
-            cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);
+            cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);//CONFIG.PHP
         }
 
         if(!empty($errores)){
             include("../templates/formAlta.php");
         }else{
-            print_r($_REQUEST);
-            $_SESSION["titulo"]=recoge("titulo");
-            $_SESSION["servicio"]=recoge("servicio");
-            $_SESSION["desc"]=recoge("desc");
-            $_SESSION["pago"]=recoge("pago");
-            $_SESSION["ubi"]=recoge("ubi");
-            $_SESSION["disponible"]=recoge("disponible");
+            $sesion["titulo"]=recoge("titulo");
+            $sesion["servicio"]=recoge("servicio");
+            $sesion["desc"]=recoge("desc");
+            $sesion["pago"]=recoge("pago");
+            $sesion["ubi"]=recoge("ubi");
+            $sesion["disponible"]=recoge("disponible");
+
+            escrituraTexto($sesion,"alta.txt");      
         }
-        include("../templates/formAlta.php");
+        
     }
     pie();
 ?>

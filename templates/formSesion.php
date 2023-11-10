@@ -11,4 +11,5 @@
         <input type="password" name="pass"><br>
         <input type="submit" name="enviar" value="Iniciar Sesion"><br>
     </form>
-    <p>Si no tienes una cuenta <a href="formRegistro.php">registrate</a> aquí.</p>
+    <p>Si no tienes una cuenta <a href="../php/registro.php">registrate</a> aquí.</p>
+        

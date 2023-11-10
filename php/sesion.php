@@ -10,18 +10,13 @@ cabecera("inicio de sesion","../style/sesion.css");
     }else{
         $correousu=recoge("correo");
         $passusu=recoge("pass");
-        if($_SESSION["pass"]!=$passusu){
-            $errores["PasswordIncorrecta"]="La contraseña no coincide";
-        }
-        if($_SESSION["correo"]!=$correousu){
-            $errores["CorreoIncorrecto"]="El correo no coincide";
-        }
+        
+        comprobarUsuario($correousu,$passusu,$errores);
 
         if(!empty($errores)){
             include("../templates/formSesion.php");
         }else{
-            print_r($_REQUEST);
-            print_r($_SESSION);
+            include("../templates/index.html");
         }
     }
 pie();

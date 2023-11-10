@@ -1,9 +1,10 @@
 
     <?php
-    foreach($errrores as $error){
+    foreach($errores as $error){
         echo $error . "<br>";
     }
     ?>
+    <form  method="post" enctype="multipart/form-data">
     <h1>Alta de Servicio</h1>
     <label for="titulo">Titulo:</label>
     <input type="text" name="titulo"><br>
@@ -31,3 +32,5 @@
     <label for="foto"></label>
     <input type="file" name="foto"><br>
     <input type="submit" name="enviar" value="enviar">
+    </form>
+    

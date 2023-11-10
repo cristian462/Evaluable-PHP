@@ -15,24 +15,9 @@ if(!isset($_REQUEST["bAceptar"])){
 }else{
     //aqui modificamos la contraseña
     $oldPass=recoge("oldPass");
-    if(!empty($oldPass)){
-        $newPass=recoge("newPass");
-        if(empty($newPass)){
-            $errores["newPass"]= "Si desea cambiar a una nueva contraseña deba ingresar una";
-        }else if($oldPass !=$_SESSION["pass"]){
-            $errores["oldPass"]= "La contraseña actual no es correcta";
-        }else{
-            $_SESSION["pass"]= $newPass;
-        }
-    }
-    //aqui modificamos la foto de perfil
-    
-    if($_SESSION["imagen"]!=($imagenNueva=(cFile("imagen",$errores,$extensionesValidas,$dir,2000000)))&&$_FILES["imagen"]["name"]!=""){
-        if (file_exists("../img/".$_SESSION["imagen"])) { //hacemos esto si queremos borrar de la base de datos la imagen anterior
-            unlink("../img/".$_SESSION["imagen"]);
-        }
-        $_SESSION["imagen"]=$imagenNueva;
-    } //esto va al final
+    $newPass=recoge("newPass");
+
+    changePass($newPass,$oldPass,$_SESSION,$errores);
 
     //aqui modificamos los idiomas
     $idiomas = recogeArray("idioma");
@@ -46,15 +31,21 @@ if(!isset($_REQUEST["bAceptar"])){
     if(!empty($info)){
         $_SESSION["info"]= recoge("info");
     }
-    //aqui enviamos el formulario
+
+    //aqui modificamos la foto de perfil
+
+    if(empty($errores)){
+    if($_SESSION["imagen"]!=($imagenNueva=(cFile("imagen",$errores,$extensionesValidas,$dir,2000000)))&&$_FILES["imagen"]["name"]!=""){
+        if (file_exists("../img/".$_SESSION["imagen"])) { //hacemos esto si queremos borrar de la base de datos la imagen anterior
+            unlink("../img/".$_SESSION["imagen"]);
+        }
+        $_SESSION["imagen"]=$imagenNueva;
+    } 
+}
     if(!empty($errores)){
         include("../templates/formUsuario.php");
     }else{
-        print_r($_FILES);
-        echo "<hr>";
-        print_r($_REQUEST);
-        echo "<hr>";
-        print_r($_SESSION);
+        include("../templates/index.html");
     }
 }
 pie();

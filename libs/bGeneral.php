@@ -134,14 +134,7 @@ if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTild
 $errores[$campo] = "Error en el campo $campo";
  return false;
 }
-function fechaValida($fechaIntroducida, $formato){
-	$fechaArray = date_parse_from_format($formato, $fechaIntroducida);
-    if(checkdate($fechaArray["month"],$fechaArray["day"],$fechaArray["year"])){
-        return true;
-    } else {
-		return false;
-	}
-}
+
 /*
 Función que valida una cadena que contiene sólo números.
 Además valida si el campo es o no requerido y el valor máximo
@@ -182,6 +175,45 @@ function cCheck (array $text, string $campo, array &$errores, array $valores, bo
         
     }
     return true;
+}
+/*
+ Modifica la contraseña guardada
+*/
+function changePass($newPass,$oldPass,array &$sesion,&$errores){
+    if(!empty($oldPass)){
+        return true;
+        if(empty($newPass)){
+            $errores["newPass"]= "Si desea cambiar a una nueva contraseña deba ingresar una";
+        }else if($oldPass !=$sesion["pass"]){
+            $errores["oldPass"]= "La contraseña actual no es correcta";
+        }else{
+            $oldPass= $newPass;
+        }
+    }
+}
+/*
+ Valida la mayoria de edad
+*/
+function cDate($fecha,$campo,&$errores,$requerido=false,$formato="d-m-Y"){
+    if(empty($fecha)&&$requerido){
+        $errores[$campo]="Porfavor ingrese una fecha de nacimiento";
+    }else{
+        $fechaAux=explode("-",$fecha);
+        $edad= (date("Y")- $fechaAux[0])+(date("m")-$fechaAux[1])/12;
+        if($edad>=18){
+            return true;
+        }else{
+            $errores[$campo] = "Para registrarse debe ser mayor de edad";
+        }
+    }
+}
+function fechaValida($fechaIntroducida, $formato,&$errores){
+	$fechaArray = date_parse_from_format($formato, $fechaIntroducida);
+    if(checkdate($fechaArray["month"],$fechaArray["day"],$fechaArray["year"])){
+        return true;
+    } else {
+		$errores["formatoFecha"]="La fecha introducida no existe";
+	}
 }
 
 /*
@@ -228,5 +260,30 @@ if (($_FILES[$nombre]['error'] != 0)) {// se comprueban los errores del servidor
             return false;
         }
     }
+}
+
+function escrituraTexto(array $sesion,string $file){
+    $stream=fopen("../files/".$file,"a+");
+    foreach($sesion as $usuario){
+        fwrite($stream, $usuario."//");
+    }
+    fwrite($stream,"\n");
+}
+
+function comprobarUsuario(string $correo, string $pass ,array &$errores){
+    $puntero=fopen("../files/usuarios.txt","r");
+    $find=false;
+    while (!feof($puntero) && !$find){
+        $linea = fgets($puntero);
+        $texto = explode("//", $linea);
+        if($correo == $texto[1] && $pass == $texto[2]){
+           return true;
+        }
+    }
+    if(!$find){
+        $errores["login"] = "Correo o contraseña incorrectos";
+        return false;
+    }
+    
 }
 ?>
