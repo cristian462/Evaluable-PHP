@@ -24,6 +24,10 @@
         $disponible=recoge("disponible");
 
         cTexto($titulo,"titulo",$errores,40,3,true,true,true);
+        /**
+        Hay que validar todos los campos
+        Los de los controles según los valores definidos
+        **/
         
         if(empty($servicio)){
             $errores["emptyServicio"]= "El servicio no está seleccionado";
@@ -45,7 +49,10 @@
             $errores["emptyDisponibilidad"]= "La disponibilidad no está seleccionada";
         }
         if(empty($errores)){
-            cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);//CONFIG.PHP
+        /**
+            El resultado de cFile hay que guardarlo porque sino no sabemos como se llama el fichero que hemos guardado
+        */
+            cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);//CONFIG.PHP Si, esto mejor en config.php
         }
 
         if(!empty($errores)){
