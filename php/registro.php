@@ -8,6 +8,10 @@ cabecera("registro","../style/registro.css");
     $fecha="";
     $idiomas="";
     $info="";
+/**
+    Esto en config.php
+    Validar lo recogido del check comparando con los valores esperados
+**/
     $extensionesValidas=["jpeg","jpg","png"];
     $dir=__DIR__.DIRECTORY_SEPARATOR."../img".DIRECTORY_SEPARATOR;
     $errores=[]; 
