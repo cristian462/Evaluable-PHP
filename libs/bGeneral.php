@@ -1,5 +1,6 @@
 ﻿<?php
 //Pinta la cabecera HTML
+include("../modelo/consultas.php");
 function cabecera($titulo=NULL,$css) // el archivo actual
 {
     if (is_null($titulo)) {
@@ -179,18 +180,19 @@ function cCheck (array $text, string $campo, array &$errores, array $valores, bo
 /*
  Modifica la contraseña guardada
 */
-function changePass($newPass,$oldPass,array &$sesion,&$errores){
+/*
+function changePass($newPass,$oldPass,array &$sesion,&$errores,$pdo){
     if(!empty($oldPass)){
         return true;
         if(empty($newPass)){
             $errores["newPass"]= "Si desea cambiar a una nueva contraseña deba ingresar una";
-        }else if($oldPass !=$sesion["pass"]){
+        }else if($oldPass != obtenerContraseña($pdo,$sesion["idUser"])){
             $errores["oldPass"]= "La contraseña actual no es correcta";
         }else{
             $oldPass= $newPass;
         }
     }
-}
+}*/
 /*
  Valida la mayoria de edad
 */

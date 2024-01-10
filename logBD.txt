@@ -1,0 +1,9 @@
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion' in 'field list'##Código: 42S22  0.54518500 1702316940
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion' in 'field list'##Código: 42S22  0.15979700 1702569777
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-idioma (id_user,id_idioma) values ('','espanol')' at line 1##Código: 42000  0.97630900 1702575429
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tianlo12@gmail.com' for key 'uq_email_usuario'##Código: 23000  0.88697400 1702575445
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tianlo12@gmail.com' for key 'uq_email_usuario'##Código: 23000  0.52801300 1702575461
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'breyner26@gmail.com' for key 'uq_email_usuario'##Código: 23000  0.48347000 1702575828
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-idioma (id_user,id_idioma) values ('7','espanol')' at line 1##Código: 42000  0.06617600 1702575861
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`evaluable_7w`.`user_idioma`, CONSTRAINT `fk_ididioma` FOREIGN KEY (`id_idioma`) REFERENCES `idioma` (`id_idioma`))##Código: 23000  0.36439600 1702576015
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`evaluable_7w`.`user_idioma`, CONSTRAINT `fk_ididioma` FOREIGN KEY (`id_idioma`) REFERENCES `idioma` (`id_idioma`))##Código: 23000  0.69447700 1702576247

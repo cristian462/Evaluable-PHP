@@ -16,9 +16,13 @@
     <label for="imagen">Foto de perfil</label>
     <input type="file" name="imagen"><br>
     <label for="idioma">Idioma:</label>
-    <input type="checkbox" name="idioma[]" value="espanol">Español</input>
-    <input type="checkbox" name="idioma[]" value="frances">Frances</input>
-    <input type="checkbox" name="idioma[]" value="ingles">Ingles</input><br><br>
+    <input type="checkbox" name="idioma[]" value="1">Español</input>
+    <input type="checkbox" name="idioma[]" value="2">Frances</input>
+    <input type="checkbox" name="idioma[]" value="3">Ingles</input><br><br>
+    <?php
+    // aqui hacer un metodo pintaCheck() que llamaria a la base de datos
+    
+    ?>
     <label for="info">Descripción:</label><br>
     <textarea name="info" cols="30" rows="10" placeholder="Indica una descripción tuya"></textarea><br>
     <input type="submit" name="bAceptar" value="Registrarse">

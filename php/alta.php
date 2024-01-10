@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(empty($_SESSION)){
+        header("location:sesion.php");
+    }
     include ("../libs/bGeneral.php");
     cabecera("Alta","../style/alta.css");
     $errores=[];
@@ -45,20 +48,41 @@
             $errores["emptyDisponibilidad"]= "La disponibilidad no está seleccionada";
         }
         if(empty($errores)){
-            cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);//CONFIG.PHP
+            $foto=cFile("foto", $errores , ["jpg","jpeg","png"],"../img/",2000000);//CONFIG.PHP
         }
 
         if(!empty($errores)){
             include("../templates/formAlta.php");
         }else{
+            try {
+                include ('../modelo/conexion.php');
+                include("../modelo/consultas.php");
+                if(agregarServicio($pdo,$titulo,$_SESSION["idUser"],$desc,$precio,$pago,$foto)){
+                    if(agregarDispServ($pdo,$disponible)){
+                        header("location:../templates/index.php");
+                    }else{
+                        $errores["darAlta"] = "Error a la hora de cargar el servicio";
+                        include("../templates/formAlta.php");
+                    }
+                }
+            }catch (PDOException $e) {
+    
+                // En este caso guardamos los errores en un archivo de errores log
+                error_log($e->getMessage() . "##Código: " . $e->getCode() . "  " . microtime() . PHP_EOL, 3, "../logBD.txt");
+                // guardamos en ·errores el error que queremos mostrar a los usuarios
+                $errores['datos'] = "Ha habido un error <br>";
+                include("../templates/formRegistro.php");
+            }
+            
+            /*
             $sesion["titulo"]=recoge("titulo");
             $sesion["servicio"]=recoge("servicio");
             $sesion["desc"]=recoge("desc");
             $sesion["pago"]=recoge("pago");
             $sesion["ubi"]=recoge("ubi");
             $sesion["disponible"]=recoge("disponible");
-
-            escrituraTexto($sesion,"alta.txt");      
+            */
+            //escrituraTexto($sesion,"alta.txt");      
         }
         
     }

@@ -1,0 +1,7 @@
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.20157700 1703099477
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.56872200 1703099627
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.99462800 1703099675
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.66023700 1703099687
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.40260100 1703099830
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.62470800 1703099859
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens##Código: HY093  0.12600600 1703099900

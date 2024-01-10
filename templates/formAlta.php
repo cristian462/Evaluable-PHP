@@ -24,10 +24,10 @@
     <label for="ubi">Ubicación:</label>
     <input type="text" name="ubi"><br>
     <select name="disponible">
-        <option value="manana">Mañanas</option>
-        <option value="tarde">Tardes</option>
-        <option value="noche">Noches</option>
-        <option value="finde">Fines de Semana</option>
+        <option value="1">Mañanas</option>
+        <option value="2">Tardes</option>
+        <option value="3">Noches</option>
+        <option value="4">Fines de Semana</option>
     </select><br>
     <label for="foto"></label>
     <input type="file" name="foto"><br>

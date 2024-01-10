@@ -30,6 +30,7 @@ header {
     background-color: #c0392b;
 }
 
+
 h1 {
     margin-top: 20px;
 }
@@ -62,4 +63,8 @@ article a {
     margin-top: 10px;
     color: #3498db;
     text-decoration: none;
+}
+#servicio{
+    background-color: darkblue;
+    color: white;
 }
